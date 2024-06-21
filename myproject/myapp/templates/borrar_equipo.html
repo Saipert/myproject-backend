@@ -1,0 +1,17 @@
+<!-- borrar_equipo.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrar Equipo</title>
+</head>
+<body>
+    <h1>Confirmar Borrado</h1>
+    <p>¿Estás seguro que deseas borrar el equipo "{{ equipo.nombre }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar Borrado</button>
+    </form>
+</body>
+</html>

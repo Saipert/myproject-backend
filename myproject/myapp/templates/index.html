@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos de Fútbol Argentino</title>
+    <!-- Enlace al archivo de estilos de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white font-bold text-xl">Equipos de Fútbol Argentino</h1>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="text-white hover:text-gray-200">Inicio</a></li>
+                <li><a href="/other/" class="text-white hover:text-gray-200">Acerca de</a></li>
+                <li><a href="/contacto/" class="text-white hover:text-gray-200">Contacto</a></li>
+                <li><a href="{% url 'agregar_equipo' %}" class="text-white hover:text-gray-200">Agregar Equipo</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4">Lista de Equipos de Fútbol Argentino</h1>
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-300 px-4 py-2">Nombre</th>
+                    <th class="border border-gray-300 px-4 py-2">Provincia</th>
+                    <th class="border border-gray-300 px-4 py-2">Estadio</th>
+                    <th class="border border-gray-300 px-4 py-2">Rival</th>
+                    <th class="border border-gray-300 px-4 py-2">Acción</th> <!-- Nueva columna para acción -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipo in equipos %}
+                <tr class="bg-white">
+                    <td class="border border-gray-300 px-4 py-2">{{ equipo.nombre }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ equipo.provincia }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ equipo.estadio }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ equipo.rival }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <form action="{% url 'borrar_equipo' equipo.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
